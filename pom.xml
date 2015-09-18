@@ -4,17 +4,21 @@
 	<groupId>org.kuali.coeus</groupId>
 	<artifactId>test.application</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>kuali-coeus test application</name>
 	<url>https://github.com/xSAVIKx/kuali-coeus-test-app</url>
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<coeus-version>1508.48-SNAPSHOT</coeus-version>
+		<sap.wsdl.location>${basedir}/src/main/resources/edu/bu/kuali/kra/wsdl</sap.wsdl.location>
+		<servlet.version>3.0.1</servlet.version>
+		<junit.version>4.12</junit.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -25,13 +29,21 @@
 		</dependency>
 		<dependency>
 			<groupId>org.kuali.coeus</groupId>
-			<artifactId>coeus-impl</artifactId>
+			<artifactId>coeus-webapp</artifactId>
 			<version>${coeus-version}</version>
+			<type>jar</type>
+			<classifier>classes</classifier>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.version}</version>
 			<type>jar</type>
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>test.application</finalName>
+		<finalName>kc-dev</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -55,6 +67,50 @@
 						</overlay>
 					</overlays>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>2.7.12</version>
+				<executions>
+					<!-- Adding an execution to generate classes for integration with SAP 
+						web service. -->
+					<execution>
+						<id>generate-sap-interface</id>
+						<phase>generate-sources</phase>
+						<inherited>false</inherited>
+						<configuration>
+							<sourceRoot>${project.build.directory}/generated/cxf/main/java</sourceRoot>
+							<disableDirectoryScan>true</disableDirectoryScan>
+							<wsdlOptions>
+								<wsdlOption>
+									<noAddressBinding>true</noAddressBinding>
+									<wsdl>${sap.wsdl.location}/SI_KCRM_PROCESS_OUTBOUND_v9.wsdl</wsdl>
+									<extraargs>
+										<extraarg>-verbose</extraarg>
+										<extraarg>-validate</extraarg>
+									</extraargs>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+					<!-- End BU Customization -->
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.cxf</groupId>
+						<artifactId>cxf-common-schemas</artifactId>
+						<version>2.2.9</version>
+					</dependency>
+					<dependency>
+						<groupId>xerces</groupId>
+						<artifactId>xercesImpl</artifactId>
+						<version>2.9.1</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

@@ -35,155 +35,136 @@ import edu.ku.kuali.kra.timeandmoney.service.TimeAndMoneyHistoryService;
  */
 public class AwardForm extends org.kuali.kra.award.AwardForm {
 
-	// BUKC-0023: Add History tab
-	private Map<Object, Object> timeAndMoneyHistory;
-	private List<Integer> columnSpan;
+    // BUKC-0023: Add History tab
+    private Map<Object, Object> timeAndMoneyHistory;
+    private List<Integer> columnSpan;
 
-	private boolean parentAward;
+    private boolean parentAward;
 
-	List<TimeAndMoneyDocument> timeAndMoneyInfoForPrintNotice;
+    List<TimeAndMoneyDocument> timeAndMoneyInfoForPrintNotice;
 
-	private AwardPrintNotice awardPrintNotice;
+    private AwardPrintNotice awardPrintNotice;
 
-	public AwardForm() {
-		super.initialize();
-		columnSpan = new ArrayList<Integer>();
-		timeAndMoneyHistory = new LinkedHashMap<Object, Object>();
-		awardPrintNotice = new AwardPrintNotice();
-		timeAndMoneyInfoForPrintNotice = new ArrayList<TimeAndMoneyDocument>();
-	}
+    public AwardForm() {
+        super.initialize();
+        columnSpan = new ArrayList<Integer>();
+        timeAndMoneyHistory = new LinkedHashMap<Object, Object>();
+        awardPrintNotice = new AwardPrintNotice();
+        timeAndMoneyInfoForPrintNotice = new ArrayList<TimeAndMoneyDocument>();
+    }
 
-	// BUKC-0023: Add History tab
-	public List<AwardVersionHistory> getAwardVersionHistoryList()
-			throws WorkflowException {
-		return getAwardVersionHistoryList(this.getAwardHierarchyBean()
-				.getRootNode());
-	}
+    // BUKC-0023: Add History tab
+    public List<AwardVersionHistory> getAwardVersionHistoryList() throws WorkflowException {
+        return getAwardVersionHistoryList(this.getAwardHierarchyBean().getRootNode());
+    }
 
-	public Map<Object, Object> getTimeAndMoneyHistory() {
-		return timeAndMoneyHistory;
-	}
+    public Map<Object, Object> getTimeAndMoneyHistory() {
+        return timeAndMoneyHistory;
+    }
 
-	public void setTimeAndMoneyHistory(Map<Object, Object> timeAndMoneyHistory) {
-		this.timeAndMoneyHistory = timeAndMoneyHistory;
-	}
+    public void setTimeAndMoneyHistory(Map<Object, Object> timeAndMoneyHistory) {
+        this.timeAndMoneyHistory = timeAndMoneyHistory;
+    }
 
-	public List<Integer> getColumnSpan() {
-		return columnSpan;
-	}
+    public List<Integer> getColumnSpan() {
+        return columnSpan;
+    }
 
-	public void setColumnSpan(List<Integer> columnSpan) {
-		this.columnSpan = columnSpan;
-	}
+    public void setColumnSpan(List<Integer> columnSpan) {
+        this.columnSpan = columnSpan;
+    }
 
-	/**
-	 * Get all version history list recursively
-	 *
-	 * @param awardHierarchy
-	 *            object of the current award
-	 * @return a list of all versions
-	 * @throws WorkflowException
-	 */
-	public List<AwardVersionHistory> getAwardVersionHistoryList(
-			AwardHierarchy awardHierarchy) throws WorkflowException {
-		List<AwardVersionHistory> awardVersionHistoryList = new ArrayList<AwardVersionHistory>();
-		if (awardHierarchy != null) {
-			TimeAndMoneyHistoryService tamhs = KcServiceLocator
-					.getService(TimeAndMoneyHistoryService.class);
-			// try {
-			// tamhs.getTimeAndMoneyHistory(awardHierarchy.getAwardNumber(),
-			// getTimeAndMoneyHistory(), getColumnSpan());
-			// } catch (WorkflowException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
+    /**
+     * Get all version history list recursively
+     *
+     * @param awardHierarchy
+     *            object of the current award
+     * @return a list of all versions
+     * @throws WorkflowException
+     */
+    public List<AwardVersionHistory> getAwardVersionHistoryList(AwardHierarchy awardHierarchy) throws WorkflowException {
+        List<AwardVersionHistory> awardVersionHistoryList = new ArrayList<AwardVersionHistory>();
+        if (awardHierarchy != null) {
+            TimeAndMoneyHistoryService tamhs = KcServiceLocator.getService(TimeAndMoneyHistoryService.class);
+            // try {
+            // tamhs.getTimeAndMoneyHistory(awardHierarchy.getAwardNumber(),
+            // getTimeAndMoneyHistory(), getColumnSpan());
+            // } catch (WorkflowException e) {
+            // // TODO Auto-generated catch block
+            // e.printStackTrace();
+            // }
 
-			tamhs.buildTimeAndMoneyHistoryObjects(
-					awardHierarchy.getAwardNumber(), awardVersionHistoryList,
-					true);
-			if (awardHierarchy.hasChildren()) {
-				for (AwardHierarchy awardHierarchyChild : awardHierarchy
-						.getChildren()) {
-					awardVersionHistoryList
-							.addAll(getAwardVersionHistoryList(awardHierarchyChild));
-				}
-			}
-		}
-		return awardVersionHistoryList;
-	}
+            tamhs.buildTimeAndMoneyHistoryObjects(awardHierarchy.getAwardNumber(), awardVersionHistoryList, true);
+            if (awardHierarchy.hasChildren()) {
+                for (AwardHierarchy awardHierarchyChild : awardHierarchy.getChildren()) {
+                    awardVersionHistoryList.addAll(getAwardVersionHistoryList(awardHierarchyChild));
+                }
+            }
+        }
+        return awardVersionHistoryList;
+    }
 
-	/**
-	 * gets BU Award Print Notice object
-	 * 
-	 * @return awardPrintNotice represents the object of awardPrintNotice
-	 */
-	public AwardPrintNotice getAwardPrintNotice() {
-		return awardPrintNotice;
-	}
+    /**
+     * gets BU Award Print Notice object
+     * 
+     * @return awardPrintNotice represents the object of awardPrintNotice
+     */
+    public AwardPrintNotice getAwardPrintNotice() {
+        return awardPrintNotice;
+    }
 
-	/**
-	 * sets Award Print Notice object
-	 * 
-	 * @param awardPrintNotice
-	 */
-	public void setAwardPrintNotice(AwardPrintNotice awardPrintNotice) {
-		this.awardPrintNotice = awardPrintNotice;
-	}
+    /**
+     * sets Award Print Notice object
+     * 
+     * @param awardPrintNotice
+     */
+    public void setAwardPrintNotice(AwardPrintNotice awardPrintNotice) {
+        this.awardPrintNotice = awardPrintNotice;
+    }
 
-	public List<TimeAndMoneyDocument> getTimeAndMoneyInfoForPrintNotice() {
-		return timeAndMoneyInfoForPrintNotice;
-	}
+    public List<TimeAndMoneyDocument> getTimeAndMoneyInfoForPrintNotice() {
+        return timeAndMoneyInfoForPrintNotice;
+    }
 
-	public void setTimeAndMoneyInfoForPrintNotice(
-			List<TimeAndMoneyDocument> timeAndMoneyInfoForPrintNotice) {
-		this.timeAndMoneyInfoForPrintNotice = timeAndMoneyInfoForPrintNotice;
-	}
+    public void setTimeAndMoneyInfoForPrintNotice(List<TimeAndMoneyDocument> timeAndMoneyInfoForPrintNotice) {
+        this.timeAndMoneyInfoForPrintNotice = timeAndMoneyInfoForPrintNotice;
+    }
 
-	// BUKC-0014: KC/SAP Interface - Get transmitted awards
-	/**
-	 * Get Transmitted Awards. loop through awards. if it has children AND NONE
-	 * of the children have the same account number then add it to return list
-	 *
-	 * @return a list of transmitted awards
-	 */
-	public List<AwardHierarchy> getTransmittedAwardsWithUnmatchedChildren() {
-		List<AwardHierarchy> returnList = new ArrayList<AwardHierarchy>();
+    // BUKC-0014: KC/SAP Interface - Get transmitted awards
+    /**
+     * Get Transmitted Awards. loop through awards. if it has children AND NONE
+     * of the children have the same account number then add it to return list
+     *
+     * @return a list of transmitted awards
+     */
+    public List<AwardHierarchy> getTransmittedAwardsWithUnmatchedChildren() {
+        List<AwardHierarchy> returnList = new ArrayList<AwardHierarchy>();
 
-		if (((AwardExtension) this.getAwardHierarchyBean().getRootNode()
-				.getAward().getExtension()).getLastTransmissionDate() != null) {
-			for (AwardHierarchy awardHierarchy : this.getAwardHierarchyBean()
-					.getRootNode().getChildren()) {
-				if (awardHierarchy.hasChildren()) {
-					String currentAccountNumber = awardHierarchy.getAward()
-							.getAccountNumber();
-					if (currentAccountNumber != null
-							|| ((AwardExtension) awardHierarchy.getAward()
-									.getExtension()).getLastTransmissionDate() != null) {
-						for (AwardHierarchy awardHierarchy2 : awardHierarchy
-								.getChildren()) {
-							Award childAward = awardHierarchy2.getAward();
-							if (!currentAccountNumber.equals(childAward
-									.getAccountNumber())) {
-								returnList.add(awardHierarchy2);
-							}
-						}
-					}
-				}
-			}
-		}
+        if (((AwardExtension) this.getAwardHierarchyBean().getRootNode().getAward().getExtension()).getLastTransmissionDate() != null) {
+            for (AwardHierarchy awardHierarchy : this.getAwardHierarchyBean().getRootNode().getChildren()) {
+                if (awardHierarchy.hasChildren()) {
+                    String currentAccountNumber = awardHierarchy.getAward().getAccountNumber();
+                    if (currentAccountNumber != null || ((AwardExtension) awardHierarchy.getAward().getExtension()).getLastTransmissionDate() != null) {
+                        for (AwardHierarchy awardHierarchy2 : awardHierarchy.getChildren()) {
+                            Award childAward = awardHierarchy2.getAward();
+                            if (!currentAccountNumber.equals(childAward.getAccountNumber())) {
+                                returnList.add(awardHierarchy2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-		return returnList;
-	}
+        return returnList;
+    }
 
-	/**
-	 * Determine if the current award is a parent award
-	 * 
-	 * @return true if the current award is a parent, false otherwise.
-	 */
-	public boolean isParentAward() {
-		return getAwardDocument().getAward().getAwardNumber()
-				.endsWith("-00001")
-				|| getAwardDocument().getAward().getAwardNumber()
-						.endsWith("-00000");
-	}
+    /**
+     * Determine if the current award is a parent award
+     * 
+     * @return true if the current award is a parent, false otherwise.
+     */
+    public boolean isParentAward() {
+        return getAwardDocument().getAward().getAwardNumber().endsWith("-00001") || getAwardDocument().getAward().getAwardNumber().endsWith("-00000");
+    }
 }

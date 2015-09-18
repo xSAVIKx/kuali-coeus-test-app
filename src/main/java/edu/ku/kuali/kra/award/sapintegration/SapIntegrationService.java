@@ -17,15 +17,14 @@ package edu.ku.kuali.kra.award.sapintegration;
 import org.kuali.kra.award.home.Award;
 
 /**
- * <p>A service which provides integration with Boston University's SAP implementation.
- * Provides two primary operations, one for performing validation against incoming
- * award hierarchy data, and other for transmitting award hierarchy data to SAP.
+ * <p>
+ * A service which provides integration with Boston University's SAP implementation. Provides two primary operations, one for performing validation
+ * against incoming award hierarchy data, and other for transmitting award hierarchy data to SAP.
  * <p/>
- * <p>It is intended that invocation of the {@link #transmit(SapTransmission)}
- * method, will invoke validation prior to performing submission.  The additional
- * {@link #validate(SapTransmission)} method is provided to allow for identifying
- * and reporting on possible validation issues prior to submission of the
- * SAP transmission.
+ * <p>
+ * It is intended that invocation of the {@link #transmit(SapTransmission)} method, will invoke validation prior to performing submission. The
+ * additional {@link #validate(SapTransmission)} method is provided to allow for identifying and reporting on possible validation issues prior to
+ * submission of the SAP transmission.
  *
  * @author Eric Westfall (ewestfal@gmail.com)
  */

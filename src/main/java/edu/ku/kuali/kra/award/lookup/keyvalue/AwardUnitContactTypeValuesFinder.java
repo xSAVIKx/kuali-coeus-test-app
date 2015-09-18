@@ -30,32 +30,30 @@ import org.kuali.rice.krad.uif.control.UifKeyValuesFinderBase;
 
 public class AwardUnitContactTypeValuesFinder extends UifKeyValuesFinderBase {
 
-	private BusinessObjectService businessObjectService;
+    private BusinessObjectService businessObjectService;
 
-	public AwardUnitContactTypeValuesFinder() {
-		businessObjectService = KcServiceLocator
-				.getService(BusinessObjectService.class);
-	}
+    public AwardUnitContactTypeValuesFinder() {
+        businessObjectService = KcServiceLocator.getService(BusinessObjectService.class);
+    }
 
-	@Override
-	public List<KeyValue> getKeyValues() {
-		Map<String, Object> values = new HashMap<String, Object>();
+    @Override
+    public List<KeyValue> getKeyValues() {
+        Map<String, Object> values = new HashMap<String, Object>();
 
-		// values.put("defaultGroupFlag", "U");
-		List<KeyValue> result = new ArrayList<KeyValue>();
-		result.add(new ConcreteKeyValue("", "select "));
-		Collection<UnitAdministratorType> types = getBusinessObjectService()
-				.findMatching(UnitAdministratorType.class, values);
-		for (UnitAdministratorType type : types) {
-			ConcreteKeyValue pair = new ConcreteKeyValue();
-			pair.setKey(type.getCode());
-			pair.setValue(type.getDescription());
-			result.add(pair);
-		}
-		return result;
-	}
+        // values.put("defaultGroupFlag", "U");
+        List<KeyValue> result = new ArrayList<KeyValue>();
+        result.add(new ConcreteKeyValue("", "select "));
+        Collection<UnitAdministratorType> types = getBusinessObjectService().findMatching(UnitAdministratorType.class, values);
+        for (UnitAdministratorType type : types) {
+            ConcreteKeyValue pair = new ConcreteKeyValue();
+            pair.setKey(type.getCode());
+            pair.setValue(type.getDescription());
+            result.add(pair);
+        }
+        return result;
+    }
 
-	protected BusinessObjectService getBusinessObjectService() {
-		return businessObjectService;
-	}
+    protected BusinessObjectService getBusinessObjectService() {
+        return businessObjectService;
+    }
 }

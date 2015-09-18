@@ -21,7 +21,9 @@ import java.util.*;
  */
 public final class SapTransmissionResponse {
 
-    public enum Status {SUCCESS, VALIDATION_FAILURE, TRANSMISSION_FAILURE}
+    public enum Status {
+        SUCCESS, VALIDATION_FAILURE, TRANSMISSION_FAILURE
+    }
 
     ;
 
@@ -39,15 +41,23 @@ public final class SapTransmissionResponse {
     /**
      * Process KC/SAP webservice call response.
      *
-     * @param status              of transmission
-     * @param message             returned message from the WS call
-     * @param warningMessages     if any
-     * @param sponsoredProgramIds BU returned Sponsored Program IDs generated
-     * @param walkerIds           generated Walker IDs
-     * @param sentData            Transmission send TS
-     * @param receivedData        Transmission recieved TS
+     * @param status
+     *            of transmission
+     * @param message
+     *            returned message from the WS call
+     * @param warningMessages
+     *            if any
+     * @param sponsoredProgramIds
+     *            BU returned Sponsored Program IDs generated
+     * @param walkerIds
+     *            generated Walker IDs
+     * @param sentData
+     *            Transmission send TS
+     * @param receivedData
+     *            Transmission recieved TS
      */
-    public SapTransmissionResponse(Status status, String message, List<String> warningMessages, Map<Long, String> sponsoredProgramIds, Map<Long, String> walkerIds, String sentData, String receivedData) {
+    public SapTransmissionResponse(Status status, String message, List<String> warningMessages, Map<Long, String> sponsoredProgramIds,
+            Map<Long, String> walkerIds, String sentData, String receivedData) {
         if (status == null) {
             throw new IllegalArgumentException("Status cannot be null.");
         }
@@ -73,16 +83,19 @@ public final class SapTransmissionResponse {
 
     }
 
-    public static SapTransmissionResponse success(Map<Long, String> sponsoredProgramIds, Map<Long, String> walkerIds, List<String> warningMessages, String sentData, String receivedData) {
+    public static SapTransmissionResponse success(Map<Long, String> sponsoredProgramIds, Map<Long, String> walkerIds, List<String> warningMessages,
+            String sentData, String receivedData) {
         return new SapTransmissionResponse(Status.SUCCESS, "Success", warningMessages, sponsoredProgramIds, walkerIds, sentData, receivedData);
     }
 
     public static SapTransmissionResponse validationFailure(String message) {
-        return new SapTransmissionResponse(Status.VALIDATION_FAILURE, message, null, new HashMap<Long, String>(), new HashMap<Long, String>(), null, null);
+        return new SapTransmissionResponse(Status.VALIDATION_FAILURE, message, null, new HashMap<Long, String>(), new HashMap<Long, String>(), null,
+                null);
     }
 
     public static SapTransmissionResponse transmissionFailure(String message, List<String> warningMessages, String sentData, String receivedData) {
-        return new SapTransmissionResponse(Status.TRANSMISSION_FAILURE, message, warningMessages, new HashMap<Long, String>(), new HashMap<Long, String>(), sentData, receivedData);
+        return new SapTransmissionResponse(Status.TRANSMISSION_FAILURE, message, warningMessages, new HashMap<Long, String>(),
+                new HashMap<Long, String>(), sentData, receivedData);
     }
 
     public boolean isSuccess() {

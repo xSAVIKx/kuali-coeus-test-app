@@ -22,33 +22,32 @@ import org.kuali.kra.award.home.Award;
  * will be one entry for each version of the current Award on Time And Money
  * Document.
  */
-public class AwardVersionHistory extends
-		org.kuali.kra.timeandmoney.AwardVersionHistory {
+public class AwardVersionHistory extends org.kuali.kra.timeandmoney.AwardVersionHistory {
 
-	// BUKC-0023: Add History tab - add Award Number to display on the History
-	// tab
-	private String awardNumber;
+    // BUKC-0023: Add History tab - add Award Number to display on the History
+    // tab
+    private String awardNumber;
 
-	public AwardVersionHistory(Award parent) {
-		super(parent);
-	}
+    public AwardVersionHistory(Award parent) {
+        super(parent);
+    }
 
-	/**
-	 * Gets the awardNumber attribute.
-	 * 
-	 * @return the awardNumber
-	 */
-	public String getAwardNumber() {
-		return awardNumber;
-	}
+    /**
+     * Gets the awardNumber attribute.
+     * 
+     * @return the awardNumber
+     */
+    public String getAwardNumber() {
+        return awardNumber;
+    }
 
-	/**
-	 * Sets the awardNumber attribute value.
-	 * 
-	 * @param awardNumber
-	 *            the awardNumber to set
-	 */
-	public void setAwardNumber(String awardNumber) {
-		this.awardNumber = awardNumber;
-	}
+    /**
+     * Sets the awardNumber attribute value.
+     * 
+     * @param awardNumber
+     *            the awardNumber to set
+     */
+    public void setAwardNumber(String awardNumber) {
+        this.awardNumber = awardNumber;
+    }
 }

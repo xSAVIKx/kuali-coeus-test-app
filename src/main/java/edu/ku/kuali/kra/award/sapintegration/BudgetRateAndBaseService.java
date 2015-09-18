@@ -27,21 +27,21 @@ import org.kuali.kra.award.home.Award;
  */
 public interface BudgetRateAndBaseService {
 
-	/**
-	 * Calculates the applicable F & A rate for the given award. This should be
-	 * the F&A rate based on the start date of the award's budget.
-	 *
-	 * @param award
-	 *            the award to calculate the applicable rate for
-	 * @return a BudgetDecimal representing the rate, or null or no rate for the
-	 *         given affective date could be found
-	 * @throws IllegalArgumentException
-	 *             if the given award is null
-	 * @throws IllegalArgumentException
-	 *             if the given award does not have a budget
-	 * @throws IllegalStateException
-	 *             if the located budget does not have a start date
-	 */
-	ScaleTwoDecimal calculateApplicableFandARate(Award award);
+    /**
+     * Calculates the applicable F & A rate for the given award. This should be
+     * the F&A rate based on the start date of the award's budget.
+     *
+     * @param award
+     *            the award to calculate the applicable rate for
+     * @return a BudgetDecimal representing the rate, or null or no rate for the
+     *         given affective date could be found
+     * @throws IllegalArgumentException
+     *             if the given award is null
+     * @throws IllegalArgumentException
+     *             if the given award does not have a budget
+     * @throws IllegalStateException
+     *             if the located budget does not have a start date
+     */
+    ScaleTwoDecimal calculateApplicableFandARate(Award award);
 
 }

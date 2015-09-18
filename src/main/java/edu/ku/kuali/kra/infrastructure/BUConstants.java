@@ -20,7 +20,7 @@ package edu.ku.kuali.kra.infrastructure;
  */
 public class BUConstants {
 
-    // BUKC-0014: KC/SAP Interface -  KC/SAP Transmission mapping
+    // BUKC-0014: KC/SAP Interface - KC/SAP Transmission mapping
     public static final String FEDERAL_RATE_DATE_OVERHEAD_KEY_FIELD_MAPPINGS = "BU_FEDERAL_RATE_DATE_OVERHEAD_KEY_FIELD_MAPPINGS";
     public static final String REPORT_CODE_TO_INVOICE_FORM_MAPPING = "BU_REPORT_CODE_TO_INVOICE_FORM_MAPPINGS";
     public static final String CHILD_TYPE_MAPPING = "BU_CHILD_TYPE_MAPPINGS";
@@ -68,7 +68,7 @@ public class BUConstants {
     public static final String ERROR_OBLIGATED_INDIRECT_AMOUNT_INVALID = "error.obligated.indirect.amount.invalid";
     public static final String ERROR_ANTICIPATED_DIRECT_AMOUNT_INVALID = "error.anticipated.direct.amount.invalid";
     public static final String ERROR_ANTICIPATED_INDIRECT_AMOUNT_INVALID = "error.anticipated.indirect.amount.invalid";
-	
+
     // BUKC-0143: Validation for - Subaward Financial - Amendment No. field (ENHC0013244)
     public static final String ERROR_SUBAWARD_MODIFICATION_ID_DUPLICATE = "error.modification.number.codeAlreadyUsed";
     public static final String ERROR_SUBAWARD_MODIFICATION_ID_REQUIRED = "error.modification.number.empty";
@@ -76,18 +76,19 @@ public class BUConstants {
 
     // BUKC-0146: Add Subaward Custom Fields - R&D and Cost Sharing (ENHC0013365 and ENHC0013357)
     public static final int FCOI_CUSTOM_DATA_ID = 125;
-	public static final int FFATA_CUSTOM_DATA_ID = 120;
+    public static final int FFATA_CUSTOM_DATA_ID = 120;
     public static final int RD_CUSTOM_DATA_ID = 130;
-	public static final int COSTSHARE_CUSTOM_DATA_ID = 140;
+    public static final int COSTSHARE_CUSTOM_DATA_ID = 140;
 
-	// BUKC-0154: Negotiation - Required fields for Association = None  (Neg. Enhancements 4)
-    public static final String NEGOTIATION_ERROR_PI_REQUIRED= "error.negotiation.pi.required";
+    // BUKC-0154: Negotiation - Required fields for Association = None (Neg. Enhancements 4)
+    public static final String NEGOTIATION_ERROR_PI_REQUIRED = "error.negotiation.pi.required";
 
-    // BUKC-0156: Negotiation - sufficient message when Activity Start/End Date are outside the bounds of the Negotiation Start/End Date (Neg. QA Issue 19)
+    // BUKC-0156: Negotiation - sufficient message when Activity Start/End Date are outside the bounds of the Negotiation Start/End Date (Neg. QA
+    // Issue 19)
     public static final String NEGOTIATION_ACTIVITY_START_AFTER_NEGOTIATION_END = "negotiation.error.activity.start.after.negotiation.end";
 
     // BUKC-0162: Negotiation - Add validation to prevent user from putting status to "Complete" if activites are still open (Neg. Enhancements #6)
     public static final String NEGOTIATION_STATUS_CANNOT_BE_CLOSED_IF_ACTIVITY_IS_OPEN = "error.negotiation.activity.cannot.be.closed.if.activity.is.open";
-    public static final String ACTIVITY_END_DATE_REQUIRED_WHEN_STATUS_COMPLETE="error.negotiation.activity.end.date.required.when.status.is.complete";
+    public static final String ACTIVITY_END_DATE_REQUIRED_WHEN_STATUS_COMPLETE = "error.negotiation.activity.end.date.required.when.status.is.complete";
 
 }

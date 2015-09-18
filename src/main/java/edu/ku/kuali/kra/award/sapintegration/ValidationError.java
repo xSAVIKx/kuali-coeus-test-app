@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * BU SAP Integration: Validation errors are associated with the id of the award which triggered the error.
- * Each award undergoing validation could potentially produce zero or more errors.  Global
+ * Each award undergoing validation could potentially produce zero or more errors. Global
  * errors are supported through the use of a method for adding global validation errors
  * to the results.
  *

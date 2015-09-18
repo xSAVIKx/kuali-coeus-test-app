@@ -35,62 +35,56 @@ import org.kuali.rice.krad.service.BusinessObjectService;
  */
 public class BudgetRateAndBaseServiceImpl implements BudgetRateAndBaseService {
 
-	private BusinessObjectService businessObjectService;
+    private BusinessObjectService businessObjectService;
 
-	/**
-	 * Uses the budget start date as the effective date
-	 *
-	 * @see edu.ku.kuali.kra.award.sapintegration.BudgetRateAndBaseService#calculateApplicableFandARate(org.kuali.kra.award.home.Award)
-	 */
+    /**
+     * Uses the budget start date as the effective date
+     *
+     * @see edu.ku.kuali.kra.award.sapintegration.BudgetRateAndBaseService#calculateApplicableFandARate(org.kuali.kra.award.home.Award)
+     */
 
-	public ScaleTwoDecimal calculateApplicableFandARate(Award award) {
-		if (award == null) {
-			throw new IllegalArgumentException("Award was null");
-		}
-		AwardBudgetExt budget = award.getAwardDocument()
-				.getBudgetVersionOverview();
-		if (budget == null) {
-			throw new IllegalArgumentException(
-					"Cannot locate budget for the given award with number: "
-							+ award.getAwardNumber());
-		}
-		Date effectiveDate = budget.getStartDate();
-		if (budget.getStartDate() == null) {
-			throw new IllegalStateException("Budget " + budget.getBudgetId()
-					+ " does not have a start date.");
-		}
-		Long budgetId = budget.getBudgetId();
-		Map<String, Object> fieldValues = new HashMap<String, Object>();
-		fieldValues.put("budgetId", budgetId);
-		Collection<BudgetRateAndBase> budgetRates = businessObjectService
-				.findMatching(BudgetRateAndBase.class, fieldValues);
-		if (budgetRates != null) {
+    public ScaleTwoDecimal calculateApplicableFandARate(Award award) {
+        if (award == null) {
+            throw new IllegalArgumentException("Award was null");
+        }
+        AwardBudgetExt budget = award.getAwardDocument().getBudgetVersionOverview();
+        if (budget == null) {
+            throw new IllegalArgumentException("Cannot locate budget for the given award with number: " + award.getAwardNumber());
+        }
+        Date effectiveDate = budget.getStartDate();
+        if (budget.getStartDate() == null) {
+            throw new IllegalStateException("Budget " + budget.getBudgetId() + " does not have a start date.");
+        }
+        Long budgetId = budget.getBudgetId();
+        Map<String, Object> fieldValues = new HashMap<String, Object>();
+        fieldValues.put("budgetId", budgetId);
+        Collection<BudgetRateAndBase> budgetRates = businessObjectService.findMatching(BudgetRateAndBase.class, fieldValues);
+        if (budgetRates != null) {
 
-			// BU Customization ID: N/A mkousheh 20120208 - Get the maximum
-			// applied rate rather than effective date calc
-			ScaleTwoDecimal maxAppliedRate = ScaleTwoDecimal.ZERO;
-			for (BudgetRateAndBase budgetRate : budgetRates) {
-				if (budgetRate.getAppliedRate().isGreaterThan(maxAppliedRate)) {
-					maxAppliedRate = budgetRate.getAppliedRate();
-				}
-			}
-			return maxAppliedRate;
-			/*
-			 * if ((effectiveDate.after(budgetRate.getStartDate()) &&
-			 * effectiveDate.before(budgetRate.getEndDate())) ||
-			 * effectiveDate.equals(budgetRate.getStartDate()) ||
-			 * effectiveDate.equals(budgetRate.getEndDate())) { return
-			 * budgetRate.getAppliedRate(); } }
-			 */
-		}
-		return null;
-	}
+            // BU Customization ID: N/A mkousheh 20120208 - Get the maximum
+            // applied rate rather than effective date calc
+            ScaleTwoDecimal maxAppliedRate = ScaleTwoDecimal.ZERO;
+            for (BudgetRateAndBase budgetRate : budgetRates) {
+                if (budgetRate.getAppliedRate().isGreaterThan(maxAppliedRate)) {
+                    maxAppliedRate = budgetRate.getAppliedRate();
+                }
+            }
+            return maxAppliedRate;
+            /*
+             * if ((effectiveDate.after(budgetRate.getStartDate()) &&
+             * effectiveDate.before(budgetRate.getEndDate())) ||
+             * effectiveDate.equals(budgetRate.getStartDate()) ||
+             * effectiveDate.equals(budgetRate.getEndDate())) { return
+             * budgetRate.getAppliedRate(); } }
+             */
+        }
+        return null;
+    }
 
-	/**
-	 * @param businessObjectService
-	 */
-	public void setBusinessObjectService(
-			BusinessObjectService businessObjectService) {
-		this.businessObjectService = businessObjectService;
-	}
+    /**
+     * @param businessObjectService
+     */
+    public void setBusinessObjectService(BusinessObjectService businessObjectService) {
+        this.businessObjectService = businessObjectService;
+    }
 }

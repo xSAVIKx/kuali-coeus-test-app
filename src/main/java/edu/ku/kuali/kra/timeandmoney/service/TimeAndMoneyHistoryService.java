@@ -20,10 +20,8 @@ import org.kuali.rice.kew.api.exception.WorkflowException;
 
 import java.util.List;
 
-public interface TimeAndMoneyHistoryService extends
-		org.kuali.kra.timeandmoney.service.TimeAndMoneyHistoryService {
+public interface TimeAndMoneyHistoryService extends org.kuali.kra.timeandmoney.service.TimeAndMoneyHistoryService {
 
-	void buildTimeAndMoneyHistoryObjects(String awardNumber,
-			List<AwardVersionHistory> awardVersionHistoryCollection,
-			boolean doNothing) throws WorkflowException;
+    void buildTimeAndMoneyHistoryObjects(String awardNumber, List<AwardVersionHistory> awardVersionHistoryCollection, boolean doNothing)
+            throws WorkflowException;
 }

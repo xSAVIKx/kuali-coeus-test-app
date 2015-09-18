@@ -10,7 +10,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<coeus-version>1508.48-SNAPSHOT</coeus-version>
-		<sap.wsdl.location>${basedir}/src/main/resources/edu/bu/kuali/kra/wsdl</sap.wsdl.location>
+		<sap.wsdl.location>${basedir}/src/main/resources/edu/ku/kuali/kra/wsdl</sap.wsdl.location>
 		<servlet.version>3.0.1</servlet.version>
 		<junit.version>4.12</junit.version>
 	</properties>

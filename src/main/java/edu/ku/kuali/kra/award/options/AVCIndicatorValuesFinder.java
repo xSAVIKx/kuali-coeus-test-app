@@ -15,12 +15,12 @@
 
 package edu.ku.kuali.kra.award.options;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.kuali.rice.core.api.util.ConcreteKeyValue;
 import org.kuali.rice.core.api.util.KeyValue;
 import org.kuali.rice.krad.uif.control.UifKeyValuesFinderBase;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * BUKC-0002: AVC Indicator field on Award Module under Payment, Reports & Terms

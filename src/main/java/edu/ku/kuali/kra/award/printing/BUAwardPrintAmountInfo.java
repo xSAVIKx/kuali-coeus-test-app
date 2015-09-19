@@ -18,7 +18,6 @@ package edu.ku.kuali.kra.award.printing;
 import java.util.List;
 
 import org.kuali.coeus.sys.api.model.ScaleTwoDecimal;
-import org.kuali.rice.core.api.util.type.KualiDecimal;
 
 public class BUAwardPrintAmountInfo implements Comparable<BUAwardPrintAmountInfo> {
     private String internalOrderNbr;

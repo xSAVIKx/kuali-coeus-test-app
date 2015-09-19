@@ -15,9 +15,9 @@
 
 package edu.ku.kuali.kra.award.printing.service;
 
-import edu.ku.kuali.kra.award.printing.BUAwardPrintDO;
-
 import java.util.Map;
+
+import edu.ku.kuali.kra.award.printing.BUAwardPrintDO;
 
 public interface BUAwardPrintingService {
     BUAwardPrintDO getAwardPrintDO(Map<String, Object> reportParameters);

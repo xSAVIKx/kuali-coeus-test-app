@@ -17,13 +17,13 @@ package edu.ku.kuali.kra.award.awardhierarchy.sync.service;
 
 // BUKC-0051: Prevent validation error on Award Hierarchy sync
 // Reference BU version of Award Document rules to skip validation of sponsor contact
-import edu.ku.kuali.kra.award.AwardDocumentRule;
-
 import org.apache.commons.lang.StringUtils;
 import org.kuali.kra.award.awardhierarchy.sync.AwardSyncLog;
 import org.kuali.kra.award.awardhierarchy.sync.AwardSyncStatus;
 import org.kuali.kra.award.awardhierarchy.sync.service.AwardSyncUtilityService;
 import org.kuali.kra.award.document.AwardDocument;
+
+import edu.ku.kuali.kra.award.AwardDocumentRule;
 
 /**
  * Award Hierarchy Sync Service Implementation.

@@ -15,9 +15,9 @@
 
 package edu.ku.kuali.kra.award.printing;
 
-import org.kuali.kra.timeandmoney.document.TimeAndMoneyDocument;
-
 import java.util.List;
+
+import org.kuali.kra.timeandmoney.document.TimeAndMoneyDocument;
 
 public class AwardPrintNotice extends org.kuali.kra.award.printing.AwardPrintNotice {
 

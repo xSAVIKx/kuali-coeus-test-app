@@ -15,10 +15,10 @@
 
 package edu.ku.kuali.kra.award.printing;
 
-import org.kuali.kra.award.contacts.AwardPerson;
-
 import java.sql.Date;
 import java.util.List;
+
+import org.kuali.kra.award.contacts.AwardPerson;
 
 public class BUAwardPrintDO {
     private String transactionType;

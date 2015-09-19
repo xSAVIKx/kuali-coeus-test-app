@@ -15,10 +15,11 @@
  */
 package edu.ku.kuali.kra.timeandmoney.service;
 
-import edu.ku.kuali.kra.timeandmoney.AwardVersionHistory;
+import java.util.List;
+
 import org.kuali.rice.kew.api.exception.WorkflowException;
 
-import java.util.List;
+import edu.ku.kuali.kra.timeandmoney.AwardVersionHistory;
 
 public interface TimeAndMoneyHistoryService extends org.kuali.kra.timeandmoney.service.TimeAndMoneyHistoryService {
 

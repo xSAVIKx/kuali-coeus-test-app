@@ -17,9 +17,9 @@ package edu.ku.kuali.kra.award.sapintegration;
 
 import java.sql.Date;
 
-import edu.ku.kuali.kra.award.home.AwardExtension;
-
 import org.kuali.kra.award.home.Award;
+
+import edu.ku.kuali.kra.award.home.AwardExtension;
 
 /**
  * A helper class which wraps an Award and provides access to custom data

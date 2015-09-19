@@ -195,7 +195,7 @@ public class BUAwardPrintingServiceImpl implements BUAwardPrintingService {
         Map<Long, String[]> suppressed = new HashMap<Long, String[]>();
         for (int i = 0; i < termIds.length; i++) {
             suppressed.put(Long.parseLong(termIds[i]), new String[] {
-                termCodes[i], termTypeCodes[i]
+                    termCodes[i], termTypeCodes[i]
             });
         }
 
@@ -526,7 +526,7 @@ public class BUAwardPrintingServiceImpl implements BUAwardPrintingService {
         /*
          * Collections.sort(amountInfoList, new Comparator<BUAwardPrintAmountInfo>() {
          * public int compare(BUAwardPrintAmountInfo o1, BUAwardPrintAmountInfo o2) {
-         *
+         * 
          * NumberFormat format = NumberFormat.getIntegerInstance();
          * int value1 = 0;
          * try {
@@ -546,7 +546,7 @@ public class BUAwardPrintingServiceImpl implements BUAwardPrintingService {
          * // TODO Auto-generated catch block
          * e.printStackTrace();
          * }
-         *
+         * 
          * return value1 - value2; // time2 - time1 to sort descending...
          * };
          * });

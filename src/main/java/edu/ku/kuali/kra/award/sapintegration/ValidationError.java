@@ -14,11 +14,11 @@
  */
 package edu.ku.kuali.kra.award.sapintegration;
 
-import org.apache.commons.lang.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
 
 /**
  * BU SAP Integration: Validation errors are associated with the id of the award which triggered the error.

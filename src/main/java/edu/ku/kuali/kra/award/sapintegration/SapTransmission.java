@@ -14,11 +14,11 @@
  */
 package edu.ku.kuali.kra.award.sapintegration;
 
-import org.kuali.kra.award.home.Award;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.kuali.kra.award.home.Award;
 
 /**
  * BU KC/SAP web service transmission process.

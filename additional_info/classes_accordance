@@ -1,3 +1,4 @@
 org.kuali.kra.budget.BudgetDecimal -> org.kuali.coeus.sys.api.model.ScaleTwoDecimal
 org.kuali.rice.core.api.util.type.KualiDecimal -> org.kuali.coeus.sys.api.model.ScaleTwoDecimal
 org.kuali.kra.budget.versions.BudgetVersionOverview -> org.kuali.kra.award.budget.AwardBudgetExt
+org.kuali.rice.kns.util.KNSGlobalVariables -> org.kuali.rice.krad.util.GlobalVariables

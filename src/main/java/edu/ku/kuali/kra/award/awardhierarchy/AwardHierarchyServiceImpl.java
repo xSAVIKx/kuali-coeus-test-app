@@ -1,12 +1,12 @@
 /*
  * Copyright 2005-2013 The Kuali Foundation
- * 
+ *
  * Licensed under the Educational Community License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.opensource.org/licenses/ecl1.php
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -55,15 +55,29 @@ public class AwardHierarchyServiceImpl extends org.kuali.kra.award.awardhierarch
 
     private static final String DOCUMENT_DESCRIPTION_FIELD_NAME = "documentDescription";
 
-    AwardNumberService awardNumberService;
-    BusinessObjectService businessObjectService;
-    DocumentService documentService;
-    VersioningService versioningService;
-    VersionHistoryService versionHistoryService;
-    AwardAmountInfoService awardAmountInfoService;
-    ParameterService parameterService;
+    private AwardNumberService awardNumberService;
+    private BusinessObjectService businessObjectService;
+    private DocumentService documentService;
+    private VersioningService versioningService;
+    private VersionHistoryService versionHistoryService;
+    private AwardAmountInfoService awardAmountInfoService;
+    private ParameterService parameterService;
     private AwardService awardService;
-    AwardVersionService awardVersionService;
+    private AwardVersionService awardVersionService;
+
+    protected ParameterService getParameterService() {
+        if (parameterService == null) {
+            parameterService = KcServiceLocator.getService(ParameterService.class);
+        }
+        return parameterService;
+    }
+
+    protected BusinessObjectService getBusinessObjectService() {
+        if (businessObjectService == null) {
+            businessObjectService = KcServiceLocator.getService(BusinessObjectService.class);
+        }
+        return businessObjectService;
+    }
 
     /**
      * Clears all filtered attributes in the new award
@@ -71,6 +85,7 @@ public class AwardHierarchyServiceImpl extends org.kuali.kra.award.awardhierarch
      * @param newAward
      *            new award
      */
+    @Override
     protected void clearFilteredAttributes(Award newAward) {
         // setting all financial information to null so copied award can spawn its own
         newAward.setAccountNumber(null);
@@ -90,7 +105,7 @@ public class AwardHierarchyServiceImpl extends org.kuali.kra.award.awardhierarch
         ((AwardExtension) newAward.getExtension()).setAwardTransmissions(new ArrayList<AwardTransmission>());
 
         try {
-            String defaultTxnTypeStr = parameterService.getParameterValueAsString(Constants.MODULE_NAMESPACE_AWARD,
+            String defaultTxnTypeStr = getParameterService().getParameterValueAsString(Constants.MODULE_NAMESPACE_AWARD,
                     ParameterConstants.DOCUMENT_COMPONENT, Constants.DEFAULT_TXN_TYPE_COPIED_AWARD);
             if (StringUtils.isNotEmpty(defaultTxnTypeStr)) {
                 newAward.setAwardTransactionTypeCode(Integer.parseInt(defaultTxnTypeStr));
@@ -129,6 +144,7 @@ public class AwardHierarchyServiceImpl extends org.kuali.kra.award.awardhierarch
     /**
      * Save Award PlaceHolder document with BU Extension
      */
+    @Override
     protected void savePlaceholderDocument(AwardDocument doc) {
         for (Award award : doc.getAwardList()) {
             if (award.getAwardId() != null && award.getExtension() != null && ((AwardExtension) award.getExtension()).getAwardId() == null) {
@@ -142,7 +158,7 @@ public class AwardHierarchyServiceImpl extends org.kuali.kra.award.awardhierarch
             // after redirect, only award persisted to table, but extension is not.
             // so, use this hook for now.
             if (GlobalVariables.getUserSession().retrieveObject("new-award:" + award.getAwardNumber()) != null) {
-                KcServiceLocator.getService(BusinessObjectService.class).save(award);
+                getBusinessObjectService().save(award);
                 GlobalVariables.getUserSession().removeObject("new-award:" + award.getAwardNumber());
             }
         }
@@ -152,15 +168,16 @@ public class AwardHierarchyServiceImpl extends org.kuali.kra.award.awardhierarch
 
     /**
      * Add new award to Award PlaceHolder and add it to the session
-     * 
+     *
      * @param doc
      * @param node
      */
+    @Override
     protected void addNewAwardToPlaceholderDocument(AwardDocument doc, AwardHierarchy node) {
         super.addNewAwardToPlaceholderDocument(doc, node);
         Award award = node.getAward();
         if (award.isNew()) {
-            GlobalVariables.getUserSession().addObject("new-award:" + award.getAwardNumber(), (Object) award.getAwardNumber());
+            GlobalVariables.getUserSession().addObject("new-award:" + award.getAwardNumber(), award.getAwardNumber());
         }
     }
 

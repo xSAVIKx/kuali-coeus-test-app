@@ -119,7 +119,7 @@ public class BUAwardPrintingServiceImpl implements BUAwardPrintingService {
         List<BUAwardPrintAdmin> pafoAdmins = populateBUAwardPrintPafoAdmin(award);
         awardPrintDO.setPafoAdmin(pafoAdmins);
         awardPrintDO.setFundsCenter(award.getLeadUnitNumber() + "-" + award.getLeadUnit().getUnitName());
-        awardPrintDO.setGrantNumber(((AwardExtension) award.getExtension()).getGrantNumber());
+        //awardPrintDO.setGrantNumber(((AwardExtension) award.getExtension()).getGrantNumber());
         awardPrintDO.setInvestigators(award.getInvestigators());
         awardPrintDO.setPrimeSponsor(award.getPrimeSponsor() != null ? award.getPrimeSponsor().getSponsorName() : null);
         awardPrintDO.setSponsor(award.getSponsorName());
@@ -132,8 +132,8 @@ public class BUAwardPrintingServiceImpl implements BUAwardPrintingService {
         List<BUAwardPrintReportReq> reportReqs = populateAwardPrintReportReq(award);
         awardPrintDO.setReportReqs(reportReqs);
         awardPrintDO.setSponsorAwardId(award.getSponsorAwardNumber());
-        List<BUAwardPrintTerm> terms = populateAwardPrintTerms(award);
-        awardPrintDO.setTerms(terms);
+        //List<BUAwardPrintTerm> terms = populateAwardPrintTerms(award);
+        //awardPrintDO.setTerms(terms);
 
         return awardPrintDO;
     }
@@ -627,8 +627,8 @@ public class BUAwardPrintingServiceImpl implements BUAwardPrintingService {
         newObject.setfAndARate(getMaxFAndARate(activeAward));
 
         newObject.setInternalOrderNbr(activeAward.getAccountNumber());
-        newObject.setDescription(((AwardExtension) activeAward.getExtension()).getChildDescription());
-        newObject.setLegacySource(((AwardExtension) activeAward.getExtension()).getWalkerSourceNumber());
+        //newObject.setDescription(((AwardExtension) activeAward.getExtension()).getChildDescription());
+        //newObject.setLegacySource(((AwardExtension) activeAward.getExtension()).getWalkerSourceNumber());
 
         printObjects.put(aai.getAwardNumber(), newObject);
 
@@ -741,15 +741,15 @@ public class BUAwardPrintingServiceImpl implements BUAwardPrintingService {
      * @param award
      * @return the last budget version
      */
-    protected AwardBudgetExt getLastBudgetVersion(AwardDocument award) {
-        List<AwardBudgetExt> awardBudgetDocumentVersions = award.getBudgetDocumentVersions();
-        AwardBudgetExt budgetVersionOverview = null;
+    protected AwardBudgetExt getLastBudgetVersion(AwardDocument awardDocument) {
+        List<AwardBudgetExt> awardBudgetDocumentVersions = awardDocument.getAward().getBudgets();
+        AwardBudgetExt latestBudget = null;
         int versionSize = awardBudgetDocumentVersions.size();
         if (versionSize > 0) {
-            budgetVersionOverview = awardBudgetDocumentVersions.get(versionSize - 1);
+            latestBudget = awardBudgetDocumentVersions.get(versionSize - 1);
         }
 
-        return budgetVersionOverview;
+        return latestBudget;
     }
 
     /**

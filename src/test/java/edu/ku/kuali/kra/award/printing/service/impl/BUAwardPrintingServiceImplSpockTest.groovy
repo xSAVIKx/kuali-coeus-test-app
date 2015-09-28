@@ -1,5 +1,6 @@
 package edu.ku.kuali.kra.award.printing.service.impl
 
+import org.kuali.coeus.common.framework.version.history.VersionHistory
 import org.kuali.kra.award.AwardAmountInfoService
 import org.kuali.kra.award.awardhierarchy.AwardHierarchyService
 import org.kuali.kra.award.budget.AwardBudgetExt
@@ -13,6 +14,7 @@ import spock.lang.Unroll
 
 class BUAwardPrintingServiceImplSpockTest extends Specification {
     BUAwardPrintingServiceImpl service
+
     private BusinessObjectService businessObjectService = Mock()
     private ParameterService parameterService = Mock()
     private AwardAmountInfoService awardAmountInfoService = Mock()
@@ -21,16 +23,18 @@ class BUAwardPrintingServiceImplSpockTest extends Specification {
     def "setup"(){
         service = new BUAwardPrintingServiceImpl(businessObjectService:businessObjectService, parameterService:parameterService,awardAmountInfoService:awardAmountInfoService,awardHierarchyService:awardHierarchyService)
     }
-    //    protected AwardBudgetExt getLastBudgetVersion(AwardDocument awardDocument) {
-    //        List<AwardBudgetExt> awardBudgetDocumentVersions = awardDocument.getAward().getBudgets();
-    //        AwardBudgetExt latestBudget = null;
-    //        int versionSize = awardBudgetDocumentVersions.size();
-    //        if (versionSize > 0) {
-    //            latestBudget = awardBudgetDocumentVersions.get(versionSize - 1);
-    //        }
-    //
-    //        return latestBudget;
-    //    }
+
+    def "test findVersionHistory"(){
+        given:
+        def versionName = "versionName"
+        def versionHistoryArray = []
+        when:
+        def result = service.findVersionHistory(Object.class, versionName)
+        then:
+        1 * businessObjectService.findMatching(VersionHistory.class, _ as Map<String,Object>) >> versionHistoryArray
+        result == versionHistoryArray
+    }
+
     def "test getLastBudgetVersion throws NPE cause awardDocument.getAward.getBudgets is null"(){
         given:
         AwardDocument awardDocument = Mock()
@@ -68,7 +72,6 @@ class BUAwardPrintingServiceImplSpockTest extends Specification {
         1 * award.getBudgets() >> awardBudgetDocumentVersions
         1 * awardDocument.getAward() >> award
         result == null
-
     }
     @Unroll
     def "test getLastBudgetVersion with #amount elements"(){

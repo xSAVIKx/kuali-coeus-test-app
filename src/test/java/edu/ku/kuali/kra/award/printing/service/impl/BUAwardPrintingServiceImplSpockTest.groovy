@@ -6,9 +6,11 @@ import org.kuali.kra.award.awardhierarchy.AwardHierarchyService
 import org.kuali.kra.award.budget.AwardBudgetExt
 import org.kuali.kra.award.document.AwardDocument
 import org.kuali.kra.award.home.Award
+import org.kuali.kra.timeandmoney.document.TimeAndMoneyDocument
 import org.kuali.rice.coreservice.framework.parameter.ParameterService
 import org.kuali.rice.krad.service.BusinessObjectService
 
+import spock.lang.Ignore
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -22,6 +24,30 @@ class BUAwardPrintingServiceImplSpockTest extends Specification {
 
     def "setup"(){
         service = new BUAwardPrintingServiceImpl(businessObjectService:businessObjectService, parameterService:parameterService,awardAmountInfoService:awardAmountInfoService,awardHierarchyService:awardHierarchyService)
+    }
+
+
+    //    @Override
+    //    public BUAwardPrintDO getAwardPrintDO(Map<String, Object> reportParameters) {
+    //        Award rootAward = (Award) reportParameters.get("rootAward");
+    //        List<TimeAndMoneyDocument> timeAndMoneyList = new ArrayList<TimeAndMoneyDocument>();
+    //        timeAndMoneyList = (List<TimeAndMoneyDocument>) reportParameters.get("timeAndMoneyList");
+    //        BUAwardPrintDO awardPrintDO = new BUAwardPrintDO();
+    //        awardPrintDO = this.populateBUAwardPrintDO(rootAward, timeAndMoneyList);
+    //
+    //        return awardPrintDO;
+    //    }
+    @Ignore
+    def "test getAwardPrintDO"(){
+        given:
+        Award rootAward = Mock()
+        TimeAndMoneyDocument document = Mock()
+        List<TimeAndMoneyDocument> timeAndMoneyList = [document]
+        def reportParameters = ["rootAward":rootAward,"timeAndMoneyList":timeAndMoneyList]
+        when:
+        def result = service.getAwardPrintDO(reportParameters)
+        then:
+        1==1
     }
 
     def "test findVersionHistory"(){
